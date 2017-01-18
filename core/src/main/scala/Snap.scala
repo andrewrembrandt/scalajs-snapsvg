@@ -80,33 +80,34 @@ import js.annotation.JSName
 * tbd. This should be 'object' based on what I understand of the http://www.scala-js.org/doc/calling-javascript.html
 *     but if it is, 'package.scala' does not find it. AK120814
 */
+@js.native
 object Snap extends js.Object {
-  def apply( width: Double, height: Double ): SnapPaper = ???
-  def apply( DOM: SnapSVGElement ): SnapPaper = ???
+  def apply( width: Double, height: Double ): SnapPaper = js.native
+  def apply( DOM: SnapSVGElement ): SnapPaper = js.native
 
   // tbd. What is the param type? "array of elements" = 'Array[SnapSVGElement]' or 'Array[SnapElement]'?
   // tbd. What is the return type? "will return set of elements"
   //
-  def apply( arr: js.Array[SnapSVGElement] ): Set[SnapElement] = ???
-  def apply( query: String ): SnapPaper = ???
+  def apply( arr: js.Array[SnapSVGElement] ): Set[SnapElement] = js.native
+  def apply( query: String ): SnapPaper = js.native
 
   // We'll have it here to keep compatibility when porting JavaScript SnapSvg code.
   // The 'Any' (map values) would be strings, numbers (do we have a way to describe that?)
   //
   // Scalaesque: Make deprecated, point at using string interpolation or '.format' instead.
   //
-  def format( token: String, json: js.Object ): String = ???
+  def format( token: String, json: js.Object ): String = js.native
 
   // Scalaesque: Make deprecated, point at using 'Math.toRadians()' and 'Math.toDegrees()' instead
   //
-  def rad( deg: Double ): Double = ???
-  def deg( rad: Double ): Double = ???
+  def rad( deg: Double ): Double = js.native
+  def deg( rad: Double ): Double = js.native
 
   // Scalaesque: Could have a type for 'Angle' that also takes care of conversion
   //    ('.asDeg', '.asRad'). The return values here are degrees, but it's not explicit anywhere.
   //
-  def angle( x1: Double, y1: Double, x2: Double, y2: Double ): Double = ???
-  def angle( x1: Double, y1: Double, x2: Double, y2: Double, x3: Double, y3: Double ): Double = ???
+  def angle( x1: Double, y1: Double, x2: Double, y2: Double ): Double = js.native
+  def angle( x1: Double, y1: Double, x2: Double, y2: Double, x3: Double, y3: Double ): Double = js.native
 
   // "handy replacement for 'typeof' operator"
   //
@@ -115,15 +116,15 @@ object Snap extends js.Object {
   // Scalaesque: Probably not needed since we have actual types.
   //
   @deprecated("Probably not needed in SnapSvg.scala", "")
-  def is( o: Any, `type`: String ): Boolean = ???
+  def is( o: Any, `type`: String ): Boolean = js.native
   
   // Note: We know that the default tolerance is 10 (SnapSvg docs) but it's best 
   //      not to repeat it here - we're simply passing on the calls to JavaScript.
   //
-  def snapTo( values: Array[Double], value: Double ): Double = ???
-  def snapTo( values: Array[Double], value: Double, tolerance: Double ): Double = ???
-  def snapTo( step: Double, value: Double ): Double = ???
-  def snapTo( step: Double, value: Double, tolerance: Double ): Double = ???
+  def snapTo( values: Array[Double], value: Double ): Double = js.native
+  def snapTo( values: Array[Double], value: Double, tolerance: Double ): Double = js.native
+  def snapTo( step: Double, value: Double ): Double = js.native
+  def snapTo( step: Double, value: Double, tolerance: Double ): Double = js.native
 
   // See available input strings in SnapSvg docs.
   //
@@ -131,30 +132,30 @@ object Snap extends js.Object {
   //          an exception (the SnapSvg API could have done that in JavaScript as well,
   //          but doesn't).
   //
-  def getRGB( color: String ): SnapRGBorError = ???
+  def getRGB( color: String ): SnapRGBorError = js.native
 
-  def hsb( h: Double, s: Double, b: Double ): String = ???
-  def hsl( h: Double, s: Double, l: Double ): String = ???
-  def rgb( r: Double, g: Double, b: Double ): String = ???
-  def color( clr: String ): SnapRGB_HSVLorError = ???
-  def hsb2rgb( h: Double, s: Double, v: Double ): SnapRGB = ???
-  def hsl2rgb( h: Double, s: Double, l: Double ): SnapRGB = ???
-  def rgb2hsb( r: Double, g: Double, b: Double ): SnapHSB = ???
-  def rgb2hsl( r: Double, g: Double, b: Double ): SnapHSL = ???
+  def hsb( h: Double, s: Double, b: Double ): String = js.native
+  def hsl( h: Double, s: Double, l: Double ): String = js.native
+  def rgb( r: Double, g: Double, b: Double ): String = js.native
+  def color( clr: String ): SnapRGB_HSVLorError = js.native
+  def hsb2rgb( h: Double, s: Double, v: Double ): SnapRGB = js.native
+  def hsl2rgb( h: Double, s: Double, l: Double ): SnapRGB = js.native
+  def rgb2hsb( r: Double, g: Double, b: Double ): SnapHSB = js.native
+  def rgb2hsl( r: Double, g: Double, b: Double ): SnapHSL = js.native
     
-  def parsePathString( path: String ): Array[SnapSegment] = ???
-  def parsePathString( arr: Array[SnapSegment] ): Array[SnapSegment] = ???
+  def parsePathString( path: String ): Array[SnapSegment] = js.native
+  def parsePathString( arr: Array[SnapSegment] ): Array[SnapSegment] = js.native
 
-  def parseTransformString( transform: String ): Array[SnapTransformation] = ???
-  def parseTransformString( arr: Array[SnapTransformation] ): Array[SnapTransformation] = ???
+  def parseTransformString( transform: String ): Array[SnapTransformation] = js.native
+  def parseTransformString( arr: Array[SnapTransformation] ): Array[SnapTransformation] = js.native
 
   // TBD SNAPSVG DOCUMENTATION AMBGUITY: 
   //    'selectAll' return value is said to be: "set or array of Element". At the same time, 
   //    the return value graphic is only 'Element' with caption "the current element"
   //    What is the right return type for 'selectAll'?
   //
-  def select( query: String ): SnapElement = ???
-  def selectAll( query: String ): Any /*Array[SnapElement] | Set[SnapElement] | SnapElement TBD*/ = ???
+  def select( query: String ): SnapElement = js.native
+  def selectAll( query: String ): Any /*Array[SnapElement] | Set[SnapElement] | SnapElement TBD*/ = js.native
 
   // Scalaesque: could use a 'Duration' type for the duration (making 'ms' etc. endings compulsory, not just a number)
   //
@@ -162,27 +163,27 @@ object Snap extends js.Object {
   //
   // TBD: What is the return type ? "animation object" what fields?
   //
-  def animation( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /*tbd: precisely?*/ ): SnapAnimMina = ???
+  def animation( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /*tbd: precisely?*/ ): SnapAnimMina = js.native
   
-  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /*tbd: precisely?*/ ): SnapAnimMina = ???
-  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double] ): SnapAnimMina = ???
-  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/ ): SnapAnimMina = ???
+  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /*tbd: precisely?*/ ): SnapAnimMina = js.native
+  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double] ): SnapAnimMina = js.native
+  def animate( from: Double, to: Double, setter: js.Function1[Double,_], duration: Int /*ms*/ ): SnapAnimMina = js.native
 
   // SNAPSVG API: When would 'from' and 'to' be arrays? Doc says so but what is the use case?
   //
-  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /* tbd precisely?*/ ): SnapAnimMina = ???
-  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double] ): SnapAnimMina = ???
-  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/ ): SnapAnimMina = ???
+  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function /* tbd precisely?*/ ): SnapAnimMina = js.native
+  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/, easing: js.Function1[Double,Double] ): SnapAnimMina = js.native
+  //def animate( from: js.Array[Double], to: js.Array[Double], setter: js.Function1[Double,_], duration: Int /*ms*/ ): SnapAnimMina = js.native
 
   // SNAPSVG API question: how is this different from 'Snap.fragment' with one argument? Is it the same?
   //                      - what is the relation of 'Element' and 'Fragment'?
   //
-  def parse( svg: String ): SnapFragment = ???
+  def parse( svg: String ): SnapFragment = js.native
   
   // Note: Without the first param, these both would end up the same after type erasure.
   //
-  def fragment( arg0: String, args: String* ): SnapFragment = ???
-  def fragment( arg0: SnapElement, args: SnapElement* ): SnapFragment = ???
+  def fragment( arg0: String, args: String* ): SnapFragment = js.native
+  def fragment( arg0: SnapElement, args: SnapElement* ): SnapFragment = js.native
 
   // These return the 'XMLHttpRequest' object, "just in case"
   //
@@ -191,17 +192,17 @@ object Snap extends js.Object {
   //
   // tbd: callback parameters?
   //
-  def ajax( url: String, postData: js.Object, callback: => Unit, scope: js.Object ): js.Object = ???
-  def ajax( url: String, postData: String, callback: => Unit, scope: js.Object ): js.Object = ???
-  def ajax( url: String, callback: => Unit, scope: js.Object ): js.Object = ???
+  def ajax( url: String, postData: js.Object, callback: => Unit, scope: js.Object ): js.Object = js.native
+  def ajax( url: String, postData: String, callback: => Unit, scope: js.Object ): js.Object = js.native
+  def ajax( url: String, callback: => Unit, scope: js.Object ): js.Object = js.native
 
   // SNAPSVG API documentation bug: should return 'Fragment' (says "loads .. as Fragment") but no return value
   //  
   // tbd: callback parameters?
   //
-  def load( url: String, callback: => Unit, scope: js.Object ): SnapFragment = ???
+  def load( url: String, callback: js.Function1[SnapFragment, Unit], scope: js.UndefOr[js.Object] = js.undefined): Unit = js.native
 
-  def getElementByPoint( x: Double, y: Double ): SnapElement = ???
+  def getElementByPoint( x: Double, y: Double ): SnapElement = js.native
 
   // SNAPSVG API correction: text says "with four arguments" but there are five.
   //
@@ -212,24 +213,25 @@ object Snap extends js.Object {
   //          maybe we can create a more scalaesque API (and what disallows us from simply
   //          stabbing in 'SnapStatic', 'SnapElement' et. al. without having such 'plugin' API?
   //
-  def plugin( f: (/*Snap*/ js.Object, /*Element*/ js.Object, /*Paper*/ js.Object, /*global*/ js.Object, /*Fragment*/ js.Object) => Unit ): Unit = ???
+  def plugin( f: (/*Snap*/ js.Object, /*Element*/ js.Object, /*Paper*/ js.Object, /*global*/ js.Object, /*Fragment*/ js.Object) => Unit ): Unit = js.native
 
   // 'Snap.Matrix' intentionally not bridged
   
-  def matrix( a: Double, b: Double, c: Double, d: Double, e: Double, f: Double ): SnapMatrix = ???
-  def matrix( other: SnapMatrix ): SnapMatrix = ???
+  def matrix( a: Double, b: Double, c: Double, d: Double, e: Double, f: Double ): SnapMatrix = js.native
+  def matrix( other: SnapMatrix ): SnapMatrix = js.native
 
   // SNAPSVG API AMBIGUITY: Should it be 'Snap.mina' in the docs, now just 'mina' (where does it belong to?)
   //
-  def mina( a: Double, A: Double, b: Double, B: Double, get: => Double, set: (Double) => Unit, easing: js.Function1[Double,Double] ): SnapAnimDescriptor = ???
+  def mina( a: Double, A: Double, b: Double, B: Double, get: => Double, set: (Double) => Unit, easing: js.Function1[Double,Double] ): SnapAnimDescriptor = js.native
 
-  val filter= SnapStaticFilter
-  val path= SnapStaticPath
+  //val filter= SnapStaticFilter
+  //val path= SnapStaticPath
 }
 
 /*
 * TBD: What is this, actually? Is it just a string, called a 'Segment' in SnapSvg API, or a genuine type?
 */
+@js.native
 trait SnapSegment extends js.Object {
 }
 
@@ -242,13 +244,20 @@ trait SnapSegment extends js.Object {
 *
 * Scalaesque: Make these types as case classes (without the error field), and use derivation.
 */
+@js.native
 trait SnapRGB extends js.Object   // { r: Double, g: Double, b: Double }
+@js.native
 trait SnapHSB extends js.Object   // { h: Double, s: Double, b: Double }
+@js.native
 trait SnapHSL extends js.Object   // { h: Double, s: Double, l: Double }
 
+@js.native
 trait SnapRGBorError extends js.Object  // { r: Double, g: Double, b: Double, hex: String, error: Boolean }
+@js.native
 trait SnapHSBorError extends js.Object  // { h: Double, s: Double, b: Double, error: Boolean }
+@js.native
 trait SnapHSLorError extends js.Object  // { h: Double, s: Double, l: Double, error: Boolean }
+@js.native
 trait SnapRGB_HSVLorError extends js.Object  // { ..fields of 'SnapRGBorError'..,  h: Double, s: Double, v: Double, l: Double }
 
 
@@ -257,19 +266,20 @@ trait SnapRGB_HSVLorError extends js.Object  // { ..fields of 'SnapRGBorError'..
 * SnapSvg provides its own DOM traversing functions. Some of these are generic
 * while others are more SVG specific. Let's bridge it all...
 */
+@js.native
 trait SnapElement extends js.Object {
 
-  private val alert = js.Dynamic.global.alert   // debugging help
+  //private val alert = js.Dynamic.global.alert   // debugging help
 
   // Returns a DOM node reference (TBD: what's the right type for that?)
   //
-  def node( x: Double, y: Double, width: Double, height: Double, refX: Double, refY: Double ): js.Object = ???
+  def node( x: Double, y: Double, width: Double, height: Double, refX: Double, refY: Double ): js.Object = js.native
 
   // SNAPSVG DOCUMENTATION AMBIGUITY
   //
   // TBD: So are we setting/getting or both the element tag name (presumably 'path','rect','ellipse' etc.)
   //  
-  def `type`( tstr: String ): String = ???    // "SVG tag name of the element"
+  def `type`( tstr: String ): String = js.native    // "SVG tag name of the element"
   
   // Scalaesque: express a more narrow type than 'Any' for the strings, numbers or booleans attribute values can actually be.
   //
@@ -278,10 +288,10 @@ trait SnapElement extends js.Object {
   //          'attr' way could be preserved as a syntax middle stop ('el.attr.color = ') or simply
   //          bypassed ('el.color = '). 'Attr' is still useful for setting multiple attributes at once.
   //
-  def attr( map: js.Object ): this.type = ???   // returns "the current element"
-  def attr( key: String ): js.Any = ???               // get an attribute (would that always be 'String' or can it be 'Number' / 'Boolean'?
+  def attr( map: js.Object ): this.type = js.native   // returns "the current element"
+  def attr( key: String ): js.Any = js.native               // get an attribute (would that always be 'String' or can it be 'Number' / 'Boolean'?
 
-  def getBBox: SnapBBox = ???
+  def getBBox: SnapBBox = js.native
   
   // SNAPSVG DOCUMENTATION AMBIGUITY
   //
@@ -290,10 +300,10 @@ trait SnapElement extends js.Object {
   // However, the current (0.3.0) doc does not portray it this way - in fact it shows 'tstr'
   // as a compulsory parameters.
   //   
-  def transform( tstr: String ): this.type = ???
-  def transform(): SnapTransformation = ???
+  def transform( tstr: String ): this.type = js.native
+  def transform(): SnapTransformation = js.native
   
-  def parent: SnapElement = ???
+  def parent: SnapElement = js.native
 
   // SNAPSVG DOCUMENTATION AMBIGUITY
   //
@@ -301,8 +311,8 @@ trait SnapElement extends js.Object {
   // Only appending an ordered set (aka list) makes sense. The SnapSvg API doc should be 
   // more precise on these.
   //
-  def append( el: SnapElement ): this.type = ???
-  def append( el: Seq[SnapElement] ): this.type = ???
+  def append( el: SnapElement ): this.type = js.native
+  def append( el: Seq[SnapElement] ): this.type = js.native
 
   // We can probably leave such aliases away (just have one word / field name for one thing)
   //
@@ -313,13 +323,13 @@ trait SnapElement extends js.Object {
   // Unlike in 'append', in 'prepend' the parameter is supposed to be only a single element,
   // not a 'set'.
   //
-  def prepend( el: SnapElement ): this.type = ???       // places 'el' within the current element, as 1st
+  def prepend( el: SnapElement ): this.type = js.native       // places 'el' within the current element, as 1st
 
   // Note: 'appendTo' moved here (introduced a bit higher up in SnapSvg docs) to keep the
   //      similar methods together.
   //
-  def appendTo( parent: SnapElement ): this.type = ???      // places this element within 'parent' as last
-  def prependTo( parent: SnapElement ): this.type = ???      // places this element within 'parent' as 1st
+  def appendTo( parent: SnapElement ): this.type = js.native      // places this element within 'parent' as last
+  def prependTo( parent: SnapElement ): this.type = js.native      // places this element within 'parent' as 1st
 
   // SNAPSVG DOCUMENTATION AMBIGUITY
   //
@@ -330,13 +340,13 @@ trait SnapElement extends js.Object {
   //
   // Same for 'insertBefore' and 'insertAfter' as well
   //
-  def before( el: SnapElement ): SnapElement /*or 'this.type'?*/ = ???
-  def after( el: SnapElement ): SnapElement /*or 'this.type'?*/ = ???
+  def before( el: SnapElement ): SnapElement /*or 'this.type'?*/ = js.native
+  def after( el: SnapElement ): SnapElement /*or 'this.type'?*/ = js.native
 
-  def insertBefore( el: SnapElement ): SnapElement /*or 'this.type'?*/ = ???
-  def insertAfter( el: SnapElement ): SnapElement /*or 'this.type'?*/ = ???
+  def insertBefore( el: SnapElement ): SnapElement /*or 'this.type'?*/ = js.native
+  def insertAfter( el: SnapElement ): SnapElement /*or 'this.type'?*/ = js.native
 
-  def remove: this.type = ???
+  def remove: this.type = js.native
 
   // Scalaesque: to which SVG element types does 'select' (searching through nested elements)
   //          actually refer? Anything other than <group>? We could limit it to only those.
@@ -346,8 +356,8 @@ trait SnapElement extends js.Object {
   // Did we get it right? 'select' chooses one, 'selectAll' chooses all (the
   // API doc wording isn't explicitly saying this).
   //
-  def select( query: String ): SnapElement = ???
-  def selectAll( query: String ): Seq[SnapElement] = ???
+  def select( query: String ): SnapElement = js.native
+  def selectAll( query: String ): Seq[SnapElement] = js.native
 
   // SNAPSVG DOCUMENTATION AMBIGUITY
   //
@@ -356,26 +366,26 @@ trait SnapElement extends js.Object {
   //
   // Also: "Returns: result of query selection" must be wrong?
   //
-  def asPX( attr: String ): Double = ???
-  def asPX( attr: String, value: String ): Double = ???   // TBD: does it return the value as pixels, or the element?
+  def asPX( attr: String ): Double = js.native
+  def asPX( attr: String, value: String ): Double = js.native   // TBD: does it return the value as pixels, or the element?
   
-  def use: SnapUseElement = ???
+  def use: SnapUseElement = js.native
 
-  override def clone: this.type = ???
+  override def clone: this.type = js.native
   
-  def toDefs: this.type = ???
+  def toDefs: this.type = js.native
 
-  def toPattern( x: Double, y: Double, width: Double, height: Double ): SnapPatternElement = ???   
+  def toPattern( x: Double, y: Double, width: Double, height: Double ): SnapPatternElement = js.native   
   
   // Scalaesque: could call this 'toMarker' since it's similar to 'toPattern' (and 'pattern' is deprecated)
   //
-  def marker( x: Double, y: Double, width: Double, height: Double, refX: Double, refY: Double ): SnapMarkerElement = ???
+  def marker( x: Double, y: Double, width: Double, height: Double, refX: Double, refY: Double ): SnapMarkerElement = js.native
   
   // SNAPSVG API AMBIGUITY: "Returns a set of animations that..." does that mean a list, or really a set?
   //
-  def inAnim: Array[SnapAnimStatus] = ???
+  def inAnim: Array[SnapAnimStatus] = js.native
 
-  def stop: this.type = ???
+  def stop: this.type = js.native
 
   // SnapSvg API inconsistency: 'attrs' when normally for arrays, it would be in singular ('attr')
   //
@@ -383,23 +393,23 @@ trait SnapElement extends js.Object {
   //        use of Duration type
   //        could use composition ('.easing') or named parameters for 'easing' and 'callback'
   //
-  def animate( attr: js.Object, duration: Int /*ms*/ ): this.type = ???
-  def animate( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double] ): this.type = ???
-  def animate( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function0[_] ): this.type = ???
+  def animate( attr: js.Object, duration: Int /*ms*/ ): this.type = js.native
+  def animate( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double] ): this.type = js.native
+  def animate( attr: js.Object, duration: Int /*ms*/, easing: js.Function1[Double,Double], callback: js.Function0[_] ): this.type = js.native
     // tbd: what is the parameter for 'callback'?
 
   // Scalaesque: do we even need these? Doesn't Scala provide enough data connection mechanisms?
   //            (but so would JavaScript - what's the use case for these?)
   //
-  def data( key: String, value: Any ): this.type = ???  
-  def data( key: String ): Any = ???
+  def data( key: String, value: Any ): this.type = js.native  
+  def data( key: String ): Any = js.native
     //
-  def removeData( key: String ): this.type = ???
-  def removeData(): this.type = ???
+  def removeData( key: String ): this.type = js.native
+  def removeData(): this.type = js.native
 
-  def outerSVG: String = ???
-  def innerSVG: String = ???
-  override def toString: String = ???    // alias for 'outerSVG'
+  def outerSVG: String = js.native
+  def innerSVG: String = js.native
+  override def toString: String = js.native    // alias for 'outerSVG'
 
   // SNAPSVG DOCUMENTATION AMBIGUITY:
   //    The doc says 'flag' and "determine whether the class should be added or removed".
@@ -410,42 +420,42 @@ trait SnapElement extends js.Object {
   // Scalaesque: is 'toggleClass' meaningful? Maybe we leave it out (can be crafted using
   //            the other three features anyways).
   //
-  def addClass( value: String ): this.type = ???
-  def removeClass( value: String ): this.type = ???
-  def hasClass( value: String ): Boolean = ???
-  def toggleClass( value: String, flag: Boolean ): this.type = ???
+  def addClass( value: String ): this.type = js.native
+  def removeClass( value: String ): this.type = js.native
+  def hasClass( value: String ): Boolean = js.native
+  def toggleClass( value: String, flag: Boolean ): this.type = js.native
 
   // TBD: params for the handlers weren't mentioned in the documentation, must look at source,
   //    samples or try out.
   //
-  def click( handler: js.Function0[_] ): this.type = ???
+  def click( handler: js.Function0[_] ): this.type = js.native
 
-  def unclick( handler: => Unit ): this.type = ???
-  def dblclick( handler: => Unit ): this.type = ???
-  def undblclick( handler: => Unit ): this.type = ???
-  def mousedown( handler: => Unit ): this.type = ???
-  def unmousedown( handler: => Unit ): this.type = ???
-  def mousemove( handler: => Unit ): this.type = ???
-  def unmousemove( handler: => Unit ): this.type = ???
-  def mouseout( handler: => Unit ): this.type = ???
-  def unmouseout( handler: => Unit ): this.type = ???
-  def mouseover( handler: => Unit ): this.type = ???
-  def unmouseover( handler: => Unit ): this.type = ???
-  def mouseup( handler: => Unit ): this.type = ???
-  def unmouseup( handler: => Unit ): this.type = ???
-  def touchstart( handler: => Unit ): this.type = ???
-  def untouchstart( handler: => Unit ): this.type = ???
-  def touchmove( handler: => Unit ): this.type = ???
-  def untouchmove( handler: => Unit ): this.type = ???
-  def touchend( handler: => Unit ): this.type = ???
-  def untouchend( handler: => Unit ): this.type = ???
-  def touchcancel( handler: => Unit ): this.type = ???
-  def untouchcancel( handler: => Unit ): this.type = ???
+  def unclick( handler: => Unit ): this.type = js.native
+  def dblclick( handler: => Unit ): this.type = js.native
+  def undblclick( handler: => Unit ): this.type = js.native
+  def mousedown( handler: => Unit ): this.type = js.native
+  def unmousedown( handler: => Unit ): this.type = js.native
+  def mousemove( handler: => Unit ): this.type = js.native
+  def unmousemove( handler: => Unit ): this.type = js.native
+  def mouseout( handler: => Unit ): this.type = js.native
+  def unmouseout( handler: => Unit ): this.type = js.native
+  def mouseover( handler: => Unit ): this.type = js.native
+  def unmouseover( handler: => Unit ): this.type = js.native
+  def mouseup( handler: => Unit ): this.type = js.native
+  def unmouseup( handler: => Unit ): this.type = js.native
+  def touchstart( handler: => Unit ): this.type = js.native
+  def untouchstart( handler: => Unit ): this.type = js.native
+  def touchmove( handler: => Unit ): this.type = js.native
+  def untouchmove( handler: => Unit ): this.type = js.native
+  def touchend( handler: => Unit ): this.type = js.native
+  def untouchend( handler: => Unit ): this.type = js.native
+  def touchcancel( handler: => Unit ): this.type = js.native
+  def untouchcancel( handler: => Unit ): this.type = js.native
   
   // Scalaesque: do we need the context parameters?
   //
-  def hover( f_in: js.Function0[_], f_out: js.Function0[_], icontext: js.Object = null, ocontext: js.Object = null ): this.type = ???
-  def unhover( f_in: js.Function0[_], f_out: js.Function0[_] ): this.type = ???
+  def hover( f_in: js.Function0[_], f_out: js.Function0[_], icontext: js.Object = null, ocontext: js.Object = null ): this.type = js.native
+  def unhover( f_in: js.Function0[_], f_out: js.Function0[_] ): this.type = js.native
 
   // SNAPSVG API consistency: 'undrag' is not defined like other 'un...' functions.
   //          It does not take parameters, but removes all drag associations.
@@ -456,36 +466,52 @@ trait SnapElement extends js.Object {
     onend: (/*event:*/ js.Object) => Unit, 
     mcontext: js.Object = null, 
     scontext: js.Object = null, 
-    econtext: js.Object = null ): this.type = ???
-  def undrag: Unit = ???    // TBD: does it not return anything, or does it return the element ('this.type')?
+    econtext: js.Object = null ): this.type = js.native
+  def undrag: Unit = js.native    // TBD: does it not return anything, or does it return the element ('this.type')?
 }
 
 // Scalaesque: more care on which methods are truly for all elements, which are for a certain kind / kinds only.
 //
+@js.native
 trait SnapRectElement extends SnapElement {}
+@js.native
 trait SnapCircleElement extends SnapElement {}
+@js.native
 trait SnapEllipseElement extends SnapElement {}
+@js.native
 trait SnapImageElement extends SnapElement {}
 
 // Scalaesque: could add to the 'getSubpath' API ability to leave out 'from' or 'to', or use
 //          negative ones (measuring from the end)
 //
+@js.native
 trait SnapPathElement extends SnapElement {
-  def getTotalLength: Double = ???
-  def getPointAtLength( lenght: Double ): PointAndAngle = ???
-  def getSubpath( from: Double, to: Double ): String = ???
+  def getTotalLength: Double = js.native
+  def getPointAtLength( lenght: Double ): PointAndAngle = js.native
+  def getSubpath( from: Double, to: Double ): String = js.native
 }
 
+@js.native
 trait SnapGroupElement extends SnapElement {}
+@js.native
 trait SnapSVGElement extends SnapElement {}
+@js.native
 trait SnapMaskElement extends SnapElement {}
+@js.native
 trait SnapPatternElement extends SnapElement {}
+@js.native
 trait SnapUseElement extends SnapElement {}
+@js.native
 trait SnapTextElement extends SnapElement {}
+@js.native
 trait SnapLineElement extends SnapElement {}
+@js.native
 trait SnapPolylineElement extends SnapElement {}
+@js.native
 trait SnapGradientElement extends SnapElement {}
+@js.native
 trait SnapFilterElement extends SnapElement {}
+@js.native
 trait SnapMarkerElement extends SnapElement {}
 
 
@@ -495,7 +521,8 @@ trait SnapMarkerElement extends SnapElement {}
 *     - with accessor methods for 'height' and 'width' (or 'h' and 'w'), or
 *       maybe we'll just implement either 'h' or 'height' throughout is Scalaesque.
 */
-trait SnapBBox extends js.Object 
+@js.native
+trait SnapBBox extends js.Object
 /* {
     val cx: Double
     val cy: Double
@@ -514,6 +541,7 @@ trait SnapBBox extends js.Object
 /*
 * Scalaesque: case class
 */
+@js.native
 trait SnapTransformation extends js.Object
 /*
 {
@@ -531,6 +559,7 @@ trait SnapTransformation extends js.Object
 /*
 * Scalaesque: case class
 */
+@js.native
 trait SnapAnimStatus extends js.Object
 /*
 {
@@ -546,6 +575,7 @@ trait SnapAnimStatus extends js.Object
 /*
 * Scalaesque: case class
 */
+@js.native
 trait SnapAnimMina extends js.Object
 /*
 {
@@ -567,6 +597,7 @@ trait SnapAnimMina extends js.Object
 *     - what's the difference between 's' and 'status', 'dur' and 'duration', 'spd' and 'speed'?
 *       Are the first ones snapshots of the getter values, at the time the structure was created?
 */
+@js.native
 trait SnapAnimDescriptor extends js.Object
 /*
 {
@@ -595,23 +626,25 @@ trait SnapAnimDescriptor extends js.Object
 *     Fragment only has these two methods, and for those the API points to
 *     similar of 'Element'.
 */
-trait SnapFragment extends js.Object {
-  def select: Unit = ???
-  def selectAll: Unit = ???
+@js.native
+trait SnapFragment extends SnapElement {
+  def select: Unit = js.native
+  def selectAll: Unit = js.native
 }
 
 /*
 * Scalaesque: work more only with matrices (not the numbers as such)
 *             - maybe add operators for + - etc. (in addition to the methods)
 */
+@js.native
 trait SnapMatrix extends js.Object {
-  def add( a: Double, b: Double, c: Double, d: Double, e: Double, f: Double ): SnapMatrix = ???
-  def add( o: SnapMatrix ): SnapMatrix = ???
-  def invert: SnapMatrix = ???
+  def add( a: Double, b: Double, c: Double, d: Double, e: Double, f: Double ): SnapMatrix = js.native
+  def add( o: SnapMatrix ): SnapMatrix = js.native
+  def invert: SnapMatrix = js.native
 
   /* Note: cannot use 'clone' as a method without overriding (do we want to override, is it coming from 'js.Object'?)
   */
-  override def clone: SnapMatrix = ???
+  override def clone: SnapMatrix = js.native
 
   // SNAPSVG API AMBIGUITY: does not mention return types - do these edit the matrix
   //          in place, or return a new one?
@@ -622,25 +655,25 @@ trait SnapMatrix extends js.Object {
   // Scalaesque: these should return a new matrix.
   //        - angle should be given as unit-agnostic (or 'Degrees' type)
   //
-  def translate( dx: Double, dy: Double ): SnapMatrix = ???
+  def translate( dx: Double, dy: Double ): SnapMatrix = js.native
     //
-  def scale( scalexy: Double ): SnapMatrix = ???
-  def scale( scalex: Double, scaley: Double ): SnapMatrix = ???
-  def scale( scalex: Double, scaley: Double, cx: Double, cy: Double ): SnapMatrix = ???
+  def scale( scalexy: Double ): SnapMatrix = js.native
+  def scale( scalex: Double, scaley: Double ): SnapMatrix = js.native
+  def scale( scalex: Double, scaley: Double, cx: Double, cy: Double ): SnapMatrix = js.native
     //
-  def rotate( deg: Double, cx: Double, cy: Double ): SnapMatrix = ???
+  def rotate( deg: Double, cx: Double, cy: Double ): SnapMatrix = js.native
 
   // Scalaeque: make a 'Point' class and use it for these, in addition to separate 'x', 'y' coords.
   //        - make 'xy' method (or simply 'apply') that runs the transformation on both coordinates.
   //
-  def x( x: Double, y: Double ): Double = ???
-  def y( x: Double, y: Double ): Double = ???
+  def x( x: Double, y: Double ): Double = js.native
+  def y( x: Double, y: Double ): Double = js.native
 
-  def determinant: Double = ???
+  def determinant: Double = js.native
   
-  def split: SnapSplit = ???
+  def split: SnapSplit = js.native
 
-  def toTransformString: String = ???
+  def toTransformString: String = js.native
 }
 
 /*
@@ -649,6 +682,7 @@ trait SnapMatrix extends js.Object {
 *
 * Note: should use 'dx','dy' everywhere when talking about translations
 */
+@js.native
 trait SnapSplit extends js.Object
 /*
 {
@@ -665,21 +699,22 @@ trait SnapSplit extends js.Object
 /*
 * Paper
 */
-trait SnapPaper extends js.Object {
+@js.native
+trait SnapPaper extends SnapElement {
 
   // SNAPSVG API inconsistency: doc says "and no attributes" but there's an attribute parameter.
   //
-  def el( name: String, attr: js.Object ): SnapElement = ???
+  def el( name: String, attr: js.Object ): SnapElement = js.native
   
   // Better to let actual SnapSvg handle default values.
   //
-  def rect( x: Double, y: Double, width: Double, height: Double ): SnapRectElement = ???
-  def rect( x: Double, y: Double, width: Double, height: Double, r: Double ): SnapRectElement = ???
-  def rect( x: Double, y: Double, width: Double, height: Double, rx: Double, ry: Double ): SnapRectElement = ???
+  def rect( x: Double, y: Double, width: Double, height: Double ): SnapRectElement = js.native
+  def rect( x: Double, y: Double, width: Double, height: Double, r: Double ): SnapRectElement = js.native
+  def rect( x: Double, y: Double, width: Double, height: Double, rx: Double, ry: Double ): SnapRectElement = js.native
 
   // SNAPSVG API consistency: since the coords are center coords, they could be called 'cx','cy' (not 'x','y')
   //
-  def circle( cx: Double, cy: Double, r: Double ): SnapCircleElement = ???
+  def circle( cx: Double, cy: Double, r: Double ): SnapCircleElement = js.native
 
   // SNAPSVG API question: doc says "x (y) offset position". It just means position of the upper left corner, right?
   //
@@ -688,24 +723,24 @@ trait SnapPaper extends js.Object {
   // SNAPSVG API AMBIGUITY: there are two return types in doc: "the image element" and
   //          "Snap element object of type image". Same thing, right?
   //
-  def image( src: String, x: Double, y: Double, width: Double, height: Double ): SnapImageElement = ???
+  def image( src: String, x: Double, y: Double, width: Double, height: Double ): SnapImageElement = js.native
 
   // SNAPSVG API consistency: also here, rather 'cx','cy' than 'x','y'
   //
-  def ellipse( cx: Double, cy: Double, rx: Double, ry: Double ): SnapEllipseElement = ???
+  def ellipse( cx: Double, cy: Double, rx: Double, ry: Double ): SnapEllipseElement = js.native
 
   // SNAPSVG API question: The prototype shows that 'path' param is optional. Does the function
   //        return the current path if it's omitted? Could be stated in the doc.
   //
   // SNAPSVG API question: no info on what 'path' would return. What does it return?
   //
-  def path( path: String ): SnapPathElement = ???   // TBD: returns something?
-  def path: SnapPathElement = ???     // TBD: returns 'SnapPathElement' or 'String'?
+  def path( path: String ): SnapPathElement = js.native   // TBD: returns something?
+  def path: SnapPathElement = js.native     // TBD: returns 'SnapPathElement' or 'String'?
 
   // Scalaesque: just one, 'g' or 'group'
   //
-  def g( els: SnapElement* ): SnapGroupElement = ???
-  val group= g _  // alias
+  def g( els: SnapElement* ): SnapGroupElement = js.native
+  //val group= g _  // alias
 
   // SNAPSVG API CONSISTENCY: All the parameters are marked 'optional' in the text
   //        but not in square brackets in the prototype. This is not akin to how
@@ -715,35 +750,35 @@ trait SnapPaper extends js.Object {
   // Scalaesque: there's really two boxes here. Maybe 'viewbox' should be presented as such
   //        (with a 'Rect' case class that takes 'x','y','w','h').
   //
-  def svg( x: Double, y: Double, width: Double, height: Double, vbx: Double, vby: Double, vbw: Double, vbh: Double ): SnapSVGElement = ???
+  def svg( x: Double, y: Double, width: Double, height: Double, vbx: Double, vby: Double, vbw: Double, vbh: Double ): SnapSVGElement = js.native
 
   // SNAPSVG API ISSUE: 'mask' is said to be "equivalent in behaviour to Paper.g" but it
   //            has no parameters.
   //
-  def mask( els: SnapElement* ): SnapMaskElement = ???
+  def mask( els: SnapElement* ): SnapMaskElement = js.native
 
   // SNAPSVG API CONSISTENCY: Same as 'svg' issue, with the marking of optional params.
   //
   // SNAPSVG API BUG: Also, it's not "equivalent in behaviour to Paper.g" - it's having the
   //          'svg' method's parameter list. Some copy-paste error here, for sure..
   //
-  def ptrn( els: SnapElement* ): SnapPatternElement = ???
+  def ptrn( els: SnapElement* ): SnapPatternElement = js.native
 
-  //def ptrn( x: Double, y: Double, width: Double, height: Double, vbx: Double, vby: Double, vbw: Double, vbh: Double ): SnapPatternElement = ???     // as in doc
+  //def ptrn( x: Double, y: Double, width: Double, height: Double, vbx: Double, vby: Double, vbw: Double, vbh: Double ): SnapPatternElement = js.native     // as in doc
 
   // Each 'id' can be a String or a SnapElement, individually
   //
   // Scalaesque: allow either multiple id's or elements but not both, mixed.
   //        (if needed, we can make a 'IdOrElement' class and converters to it)
   //
-  def use( ids: js.Object* ): SnapUseElement = ???
+  def use( ids: js.Object* ): SnapUseElement = js.native
 
   // tbd. does having 'text' both as param name and method name cause problems?
   //
-  def text( x: Double, y: Double, text: js.String ): SnapTextElement = ???
-  def text( x: Double, y: Double, text: js.Array[String] ): SnapTextElement = ???
+  def text( x: Double, y: Double, text: String ): SnapTextElement = js.native
+  def text( x: Double, y: Double, text: js.Array[String] ): SnapTextElement = js.native
 
-  def line( x1: Double, y1: Double, x2: Double, y2: Double ): SnapLineElement = ???
+  def line( x1: Double, y1: Double, x2: Double, y2: Double ): SnapLineElement = js.native
   
   // Snap.svg documentation says "points" but it really means "sequtive pairs of numbers", 
   // s.a. in the sample: '[10, 10, 100, 100]' and '(10, 10, 100, 100)'.
@@ -751,20 +786,20 @@ trait SnapPaper extends js.Object {
   // Scalaesque: make it take actual list of Points.
   //        - if 'polyline' and 'polygon' are the same, bring in only 'polyline'
   //  
-  def polyline( points: Double* ): SnapPolylineElement = ???
-  val polygon = polyline _    // just an alias?
+  def polyline( points: Double* ): SnapPolylineElement = js.native
+  //val polygon = polyline _    // just an alias?
 
-  def gradient( s: String ): SnapGradientElement = ???
+  def gradient( s: String ): SnapGradientElement = js.native
 
   // Scalaesque: 
   //  - we might not wish to override 'clone' and 'toString' - rather use 'outerSVG'
   //    as with the Elements
   //
-  override def toString: String = ???    // SVG code for the Paper
+  override def toString: String = js.native    // SVG code for the Paper
 
-  def clear(): Unit = ???       // has side-effects, thus '()' retained
+  def clear(): Unit = js.native       // has side-effects, thus '()' retained
 
-  def filter( filstr: String ): SnapFilterElement = ???
+  def filter( filstr: String ): SnapFilterElement = js.native
 }
 
 /*
@@ -774,18 +809,19 @@ trait SnapPaper extends js.Object {
 *
 * tbd. having 'object' makes this compile (for Croc1 demo), but it's really a namespace. Which one is "right" in Scala.js point of view? AK310814
 */
+@js.native
 object mina extends js.Object {
-  def time: Double = ???    // tbd. maybe it returns 'Long'?
-  def getById(id: String): SnapAnimDescriptor = ???
+  def time: Double = js.native    // tbd. maybe it returns 'Long'?
+  def getById(id: String): SnapAnimDescriptor = js.native
 
-  def linear(n: Double): Double = ???
-  def easeout(n: Double): Double = ???
-  def easein(n: Double): Double = ???
-  def easeinout(n: Double): Double = ???
-  def backin(n: Double): Double = ???
-  def backout(n: Double): Double = ???
-  def elastic(n: Double): Double = ???
-  def bounce(n: Double): Double = ???
+  def linear(n: Double): Double = js.native
+  def easeout(n: Double): Double = js.native
+  def easein(n: Double): Double = js.native
+  def easeinout(n: Double): Double = js.native
+  def backin(n: Double): Double = js.native
+  def backout(n: Double): Double = js.native
+  def elastic(n: Double): Double = js.native
+  def bounce(n: Double): Double = js.native
 }
 
 
@@ -892,7 +928,8 @@ object SnapStaticPath {
 // Scalaesque: Make also '.xy' for a point, and have '.angle' instead of '.alpha'
 //            - make '.angle' use 'Degree' or unit-agnostic angle class
 //
-trait PointAndAngle extends js.Object 
+@js.native
+trait PointAndAngle extends js.Object
 /*
 {
   val x: Double
@@ -905,7 +942,8 @@ trait PointAndAngle extends js.Object
 //        Replace 'm', 'n', 'start', 'end' by points (actually keeps the current API) 
 //        Maybe 'alpha' is appropriate here instead of 'angle' - need to check that from somewhere.
 //
-trait PointAnchorsAndAlpha extends js.Object 
+@js.native
+trait PointAnchorsAndAlpha extends js.Object
 /*
 {
   val x: Double
@@ -922,6 +960,7 @@ trait PointAnchorsAndAlpha extends js.Object
 //
 // Note: It's not clear whether some of the return values are these, or all 'BBoxWidthHeAight'
 //
+@js.native
 trait BBox extends js.Object
 /*
 {
@@ -935,6 +974,7 @@ trait BBox extends js.Object
 // Scalaesque: use Points
 //        - make 'width' and 'height' as functions (not members)
 //
+@js.native
 trait BBoxWidthHeight extends BBox
 /*
 {
@@ -949,6 +989,7 @@ trait BBoxWidthHeight extends BBox
 
 // Scalaesque: use Point (for x,y), BezPoints for 'bez1' and 'bez2' (with p1,p2,c1,c2)
 //
+@js.native
 trait IntersectInfo extends js.Object
 /*
 {
@@ -967,24 +1008,25 @@ trait IntersectInfo extends js.Object
 * Scalaesque: let's do this deriving of normal Scala collections, then adding
 *           the animate etc. onto it.
 */
+@js.native
 trait SnapSet extends js.Object {
   // SNAPSVG API AMBIGUITY: says "each argument" but none are listed in the prototype of 'push'.
   //          - push "returns original element" - what would that be? would make sense that it returns the set
   //
-  def push( args: SnapElement* ): SnapSet = ???   // TBD: return value unsure
-  def pop: SnapElement = ???
+  def push( args: SnapElement* ): SnapSet = js.native   // TBD: return value unsure
+  def pop: SnapElement = js.native
 
   // Note: "If the callback returns 'false' the loop stops running" (but that does not mean
   //      it needs to return something.
   //
-  def forEach( callback: SnapElement => Any, context: js.Object ): this.type = ???
+  def forEach( callback: SnapElement => Any, context: js.Object ): this.type = js.native
   
   // SNAPSVG API inconsistency: normally 'attr' is used for plural as well, here 'attrs'
   //
   // Scalaesque: 'attr' can work on the known set (and types) of attributes
   //            - use of Duration class
   //
-  def animate( attr: js.Object, duration: Int, easing_f: js.Function1[Double,Double], callback: js.Function0[_] ): SnapElement = ???
+  def animate( attr: js.Object, duration: Int, easing_f: js.Function1[Double,Double], callback: js.Function0[_] ): SnapElement = js.native
 
   // This version would animate the set's contents separately - 1st param for 1st entry, and so forth..
   // Is this really neeeded and useful in reality. Multiple sets would do the same.
@@ -993,17 +1035,14 @@ trait SnapSet extends js.Object {
   //      It's hard to describe this in types, since the params are arrays (2..4 entries long) of different
   //      types (map, double, functions), not JavaScript hashmaps as usually in the SnapSvg API.
   //
-  def animate( animation: Seq[js.Object]* ): SnapElement = ???
+  def animate( animation: Seq[js.Object]* ): SnapElement = js.native
 
-  def bind( attr: String, callback: => Unit ): this.type = ???
-  def bind( attr: String, el: SnapElement ): this.type = ???
-  def bind( attr: String, el: SnapElement, eattr: String ): this.type = ???
+  def bind( attr: String, callback: => Unit ): this.type = js.native
+  def bind( attr: String, el: SnapElement ): this.type = js.native
+  def bind( attr: String, el: SnapElement, eattr: String ): this.type = js.native
   
-  def clear(): Unit = ???
+  def clear(): Unit = js.native
 
-  def splice( index: Int, count: Int, insertion: SnapElement* ): SnapSet = ???
-  def exclude( el: SnapElement ): Boolean = ???
+  def splice( index: Int, count: Int, insertion: SnapElement* ): SnapSet = js.native
+  def exclude( el: SnapElement ): Boolean = js.native
 }
-
-  
-
